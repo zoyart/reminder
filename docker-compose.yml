@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+    nginx:
+        build:
+            context: .
+            dockerfile: docker/Nginx.Dockerfile
+        ports:
+            - 7777:80
+        links:
+            - php
+        volumes:
+            - ./:/var/www
+            - ./docker/conf:/etc/nginx/conf.d
+        depends_on:
+            -   php
+
+    php:
+        build:
+            context: .
+            dockerfile: docker/Fpm.Dockerfile
+        volumes:
+            - ./:/var/www
+           # - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
+        links:
+            - mysql
+
+    mysql:
+        container_name: mysql
+        image: mysql
+        ports:
+            - 33061:3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=reminder
+        volumes:
+            -   mysql_data:/var/lib/mysql
+
+    phpmyadmin:
+        image: phpmyadmin
+        container_name: pma
+        links:
+            - mysql
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+            - 8081:80
+volumes:
+    mysql_data:
+
+

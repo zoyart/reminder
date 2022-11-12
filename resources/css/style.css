@@ -1,0 +1,87 @@
+body, html {
+    font-family: 'Montserrat', sans-serif;
+}
+.c-btn-board {
+    border: 1px solid #FD8C73;
+}
+.c-btn-board:hover {
+    color: white;
+    background-color: #FD8C73;
+    transition: 0.3s;
+}
+
+
+.border-c-gray {
+    border-color: #CED4DA;
+}
+
+
+.card-gradient {
+    z-index: 1000;
+    position: relative;
+    display: inline-block;
+
+    /*background: rgb(255,255,255);*/
+    /*background: linear-gradient(14deg, rgba(255,255,255,1) 35%, rgba(255,231,225,1) 100%);*/
+    background: rgb(255,255,255);
+    background: linear-gradient(20deg, rgba(255,255,255,1) 0%, rgba(116,179,228,1) 100%);
+}
+/*.card-gradient::before {*/
+/*    content: "";*/
+/*    display: block;*/
+/*    opacity: 0;*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    transition: opacity 0.5s ease-in-out;*/
+/*    z-index: -1000;*/
+/*    background: rgb(255,255,255);*/
+/*    background: linear-gradient(14deg, rgba(255,255,255,1) 0%, rgba(255,183,165,1) 100%);*/
+/*}*/
+/*.card-gradient:hover::before {*/
+/*    opacity: 1;*/
+/*}*/
+
+.text-orange {
+    color: #FD8C73;
+}
+
+.bg-orange {
+    background-color: #FD8C73;
+}
+
+.orange-link {
+    color: #FD8C73;
+}
+.orange-link:hover {
+    color: black;
+    transition: 0.3s;
+}
+
+.btn-outline-danger-c {
+    color: #DC3545;
+}
+.btn-outline-danger-c:hover {
+    color: #DC3545;
+    border: 1px solid #DC3545;
+    transition: 0.3s;
+}
+
+.btn-outline-orange-c {
+    color: #FD8C73;
+}
+.btn-outline-orange-c:hover {
+    color: #DC3545;
+    border: 1px solid #FD8C73;
+    transition: 0.3s;
+}
+
+.btn-more {
+    color: #FD8C73;
+}
+
+.hide-item {
+    display: none;
+}
