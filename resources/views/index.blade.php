@@ -146,13 +146,21 @@
                                                 d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                                         </svg>
                                     </button>
-                                    <span>Next repeat {{ $task['next_iteration'] }}</span>
                                     <span>{{ $task['phase'] }} of 5</span>
                                 </div>
                                 <div class="collapse" id="task-action-{{ $task['id'] }}">
                                     <div class="actions mt-3 d-flex">
-                                        <button type="button" class="btn c-btn-board rounded-1 me-3 py-0">Complete!
-                                        </button>
+                                        <form action="{{ route('completeTask') }}" method="post">
+                                            <input type="text" name="task_id" value="{{ $task['id'] }}"
+                                                   style="display: none">
+                                            <input type="text" name="phase" value="{{ $task['phase'] }}"
+                                                   style="display: none">
+                                            <input type="text" name="repeat_date" value="{{ $task['repeat_date'] }}"
+                                                   style="display: none">
+                                            @csrf
+                                            <button type="submit" class="btn c-btn-board rounded-1 me-3 py-0">Complete!
+                                            </button>
+                                        </form>
                                         <button type="button" class="btn c-btn-board rounded-1 me-3 py-0">Edit</button>
                                         <form action="{{ route('deleteTask') }}" method="post">
                                             @method('DELETE')

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('text')->nullable(true);
             $table->string('phase');
-            $table->date('next_iteration');
+            $table->date('repeat_date');
         });
     }
 

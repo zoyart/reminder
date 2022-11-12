@@ -37,7 +37,7 @@ class TasksController extends Controller
             'text' => $request->text,
             'board_id' => $request->board_id,
             'phase' => 1,
-            'next_iteration' => date('Y-m-d'),
+            'repeat_date' => date('Y-m-d'),
         ]);
 
         return back();
@@ -50,25 +50,34 @@ class TasksController extends Controller
     }
 
     public function completeTask(Request $request) {
-        switch ($request->current_phase) {
+        // Создание объекта для функции date_modify
+        $repeatDate = date_create($request->repeat_date);
+        $task = Task::find($request->task_id);
+
+        switch ($request->phase) {
             case 1:
-                $nextIteration = date_modify($request->currentIteration, "+1 day");
+                $repeatDate = date_modify($repeatDate, "+1 day");
                 break;
             case 2:
-                $nextIteration = date_modify($request->currentIteration, "+2 day");
+                $repeatDate = date_modify($repeatDate, "+3 day");
                 break;
             case 3:
-                $nextIteration = date_modify($request->currentIteration, "+5 day");
+                $repeatDate = date_modify($repeatDate, "+5 day");
                 break;
             case 4:
-                $nextIteration = date_modify($request->currentIteration, "+7 day");
+                $repeatDate = date_modify($repeatDate, "+14 day");
+                break;
+            case 5:
+                Task::find($request->task_id)->delete();
                 break;
         }
-
-        Task::find($request->task_id)->update([
-            'phase' => $request->current_phase + 1,
-            'next_iteration' => $nextIteration,
-        ]);
+        
+        if (isset($task)) {
+            $task->update([
+                'phase' => $request->phase + 1,
+                'repeat_date' => $repeatDate,
+            ]);
+        }
 
         return back();
     }

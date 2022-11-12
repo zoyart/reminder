@@ -12,7 +12,7 @@ class Task extends Model
     protected $fillable = [
         'title',
         'text',
-        'next_iteration',
+        'repeat_date',
         'phase',
         'board_id',
     ];
